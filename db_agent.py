@@ -1,5 +1,6 @@
 from langchain.agents import Tool, AgentExecutor, create_openai_tools_agent
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from typing import List, Dict, Any
 import psycopg2
@@ -44,9 +45,10 @@ class DatabaseTools:
 class DatabaseAgent:
     def __init__(self):
         self.db_tools = DatabaseTools()
-        self.llm = ChatOpenAI(
-            model_name="gpt-4o-mini",
-            temperature=0,
+        self.llm = ChatGoogleGenerativeAI(
+            model="gemini-2.0-flash",
+            temperature=0.4,
+            max_output_tokens=5096
         )
 
         # Define tools
